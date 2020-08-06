@@ -16,7 +16,9 @@ app.use(express.static('public'));
 
 
 //functions to make things go
-
+app.get("/api/notes", (req, res) => {
+    res.json(returnData())
+})
 // Routes
 //-----------------------
 app.get("/notes", function (req,res) {
@@ -34,4 +36,10 @@ app.get("/assets/css/styles.css", function (req, res) {
 
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "public/index.html" ))
+})
+
+
+//listen function
+app.listen(PORT, function(){
+    console.log("App listening on PORT " + PORT);
 })
