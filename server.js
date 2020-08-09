@@ -34,6 +34,27 @@ app.get("/api/notes", (req, res) => {
     
 })
 
+//post function
+app.post("/api/notes", (req, res) => {
+    fs.readfile("db/db.json", "utf-8", function (error, data){
+        if (error){
+            console.log(error)
+        }
+
+        let parsedNotes = JSON.parse(data);
+
+        parsedNotes.push(req.body)
+
+        fs.writeFile("db/db.json", JSON.stringify(parsedNotes), function (error, res){
+            if (error){
+                console.log(error)
+            } 
+
+            res.json(parsedNotes)
+        })
+    })
+})
+
 
 
 // Routes
