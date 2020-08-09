@@ -55,20 +55,33 @@ app.post("/api/notes", (req, res) => {
     })
 })
 
+//delete function whichs pulls notes by select ids
+app.delete("/api/notes/:id", function (req, res){
+    const id = req.params.id
+    console.log(id)
+
+    fs.readFile('db/db.json', "utf-8", function (error, data){
+        if (error) {
+            console.log(error)
+        }
+
+        let jsonNotes = JSON.parse(data);
+
+        jsonNotes = jsonNotes.filter(note => note.id !== id)
+
+        fs.writeFile('db/db.json', JSON.stringify(jsonNotes), function (error, result){
+            if (error) {
+                console.log(error)
+            }
+        } )
+    })
+} )
 
 
-// Routes
-//-----------------------
 
 
 
-app.get("/assets/js/index.js", function (req,res) {
-    res.sendFile(path.join(__dirname, "./assets/js/index.js"))
-});
 
-app.get("/assets/css/styles.css", function (req, res) {
-    res.sendFile(path.join(__dirname, "./assets/css/styles.css"))
-});
 
 
 app.get("*", function (req, res) {
