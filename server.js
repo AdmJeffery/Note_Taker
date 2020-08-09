@@ -43,9 +43,9 @@ app.post("/api/notes", (req, res) => {
 
         let parsedNotes = JSON.parse(data);
 
-        parsedNotes.push(req.body)
+        parsedNotes.push(req.body);
 
-        fs.writeFile("db/db.json", JSON.stringify(parsedNotes), function (error, res){
+        fs.writeFile("db/db.json", JSON.stringify(parsedNotes), function (error, result){
             if (error){
                return console.log(error)
             } 
@@ -53,7 +53,7 @@ app.post("/api/notes", (req, res) => {
             res.json(parsedNotes)
         })
     })
-})
+});
 
 //delete function whichs pulls notes by select ids
 app.delete("/api/notes/:id", function (req, res){

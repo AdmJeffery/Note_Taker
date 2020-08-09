@@ -54,6 +54,8 @@ const handleNoteSave = function () {
   const newNote = {
     title: $noteTitle.val(),
     text: $noteText.val(),
+    //had to add in an id property into the js file.
+    id: Math.floor(Math.random()*10000)
   };
 
   saveNote(newNote).then(() => {
