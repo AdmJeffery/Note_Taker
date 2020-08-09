@@ -6,7 +6,7 @@ const fs = require("fs")
 let app = express();
 
 
-let PORT = 8080;
+var PORT = process.env.PORT || 8080;
 
 
 
@@ -15,6 +15,10 @@ app.use(express.json());
 app.use(express.static('public'));
 
 
+//root route
+app.get("/", function (req,res){
+    res.sendFile(path.join(__dirname, "public/notes.html"))
+})
 //route(s) to notes
 
 app.get("/notes", function (req,res) {
