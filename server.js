@@ -22,9 +22,9 @@ app.get("/notes", function (req,res) {
 });
 
 app.get("/api/notes", (req, res) => {
-    fs.readFile("db/db.json", "utf-8", function (error, data){
+    fs.readFile("db/db.json", "utf8", function (error, data){
         if (error){
-            console.log(error)
+          return  console.log(error)
         }
 
         const newData = JSON.parse(data);
@@ -36,9 +36,9 @@ app.get("/api/notes", (req, res) => {
 
 //post function
 app.post("/api/notes", (req, res) => {
-    fs.readfile("db/db.json", "utf-8", function (error, data){
+    fs.readFile('db/db.json', "utf8", function(error, data){
         if (error){
-            console.log(error)
+            return console.log(error)
         }
 
         let parsedNotes = JSON.parse(data);
@@ -47,7 +47,7 @@ app.post("/api/notes", (req, res) => {
 
         fs.writeFile("db/db.json", JSON.stringify(parsedNotes), function (error, res){
             if (error){
-                console.log(error)
+               return console.log(error)
             } 
 
             res.json(parsedNotes)
@@ -60,9 +60,9 @@ app.delete("/api/notes/:id", function (req, res){
     const id = req.params.id
     console.log(id)
 
-    fs.readFile('db/db.json', "utf-8", function (error, data){
+    fs.readFile('db/db.json', "utf8", function (error, data){
         if (error) {
-            console.log(error)
+          return  console.log(error)
         }
 
         let jsonNotes = JSON.parse(data);
@@ -71,8 +71,10 @@ app.delete("/api/notes/:id", function (req, res){
 
         fs.writeFile('db/db.json', JSON.stringify(jsonNotes), function (error, result){
             if (error) {
-                console.log(error)
+              return  console.log(error)
             }
+
+            res.json(jsonNotes)
         } )
     })
 } )
@@ -83,13 +85,13 @@ app.delete("/api/notes/:id", function (req, res){
 
 
 
-
+//root route
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "public/index.html" ))
 })
 
 
-//listen function
+//listener function
 app.listen(PORT, function(){
     console.log("App listening on PORT " + PORT);
 })
