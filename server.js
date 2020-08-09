@@ -1,12 +1,12 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs")
-const util = require("util")
+
 
 let app = express();
 
 
-let PORT = process.env.PORT || 3000;
+let PORT = 8080;
 
 
 
@@ -15,15 +15,31 @@ app.use(express.json());
 app.use(express.static('public'));
 
 
-//functions to make things go
-app.get("/api/notes", (req, res) => {
-    res.json(returnData())
-})
-// Routes
-//-----------------------
+//route(s) to notes
+
 app.get("/notes", function (req,res) {
     res.sendFile(path.join(__dirname, "public/notes.html"))
 });
+
+app.get("/api/notes", (req, res) => {
+    fs.readFile("db/db.json", "utf-8", function (error, data){
+        if (error){
+            console.log(error)
+        }
+
+        const newData = JSON.parse(data);
+
+        res.json(newData);
+    })
+    
+})
+
+
+
+// Routes
+//-----------------------
+
+
 
 app.get("/assets/js/index.js", function (req,res) {
     res.sendFile(path.join(__dirname, "./assets/js/index.js"))
