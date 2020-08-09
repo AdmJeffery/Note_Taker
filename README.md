@@ -16,4 +16,4 @@ This application allows the user to write short notes, store them, revisit each 
 
 ## Heroku
 See this app in action!
-[https://still-chamber-70671.herokuapp.com/](#https://still-chamber-70671.herokuapp.com/)
+[Heroku_App](#https://still-chamber-70671.herokuapp.com/)
